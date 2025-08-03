@@ -10,9 +10,8 @@ class CohereClient:
 
     def get_response(self, message: str) -> str:
         response = self.client.chat(
-            message=message,
+            message=f"answer without using (# **) {message}",
             model=self.model,
             temperature=self.temperature
         )
         return response.text
-

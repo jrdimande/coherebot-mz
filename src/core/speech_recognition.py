@@ -15,4 +15,3 @@ class SpeechRecognizer:
             return text
         except sr.UnknownValueError:
             return "ERROR"
-

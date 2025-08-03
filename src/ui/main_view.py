@@ -2,6 +2,7 @@ import tkinter as tk
 from src.core.cohere_service import CohereClient
 from src.core.speech_recognition import SpeechRecognizer
 from tkinter import PhotoImage
+import threading
 
 
 class MainView:
@@ -69,20 +70,32 @@ class MainView:
         self.send_voice_message = tk.Button(self.root, image=self.voice_img, bd=0, command=self.listen)
         self.send_voice_message.place(x=820, y=602)
 
-    # Send messages function
     def send_message(self, event=None):
+        threading.Thread(target=self.send_message_thread).start()
+
+    # Send messages function
+    def send_message_thread(self, event=None):
         message = self.message_text.get("1.0", tk.END).strip()
         self.message_text.delete("1.0", tk.END)
+
         response = self.cohere_client.get_response(message)
+
+        self.responses_text.after(0, lambda: self.show_response(response))
+
+    def show_response(self, response):
         self.responses_text.delete("1.0", tk.END)
         self.responses_text.insert(tk.END, response)
 
     def listen(self):
+        threading.Thread(target=self.listen_thread).start()
+
+    def listen_thread(self):
+        self.responses_text.delete("1.0", tk.END)
         self.responses_text.insert(tk.END, "Listening...")
         message = self.sr.listen()
         response = self.cohere_client.get_response(message)
-        self.responses_text.delete("1.0", tk.END)
-        self.responses_text.insert(tk.END, response)
+        self.responses_text.after(0, lambda : self.show_response(response))
+
 
 
     def run(self):
