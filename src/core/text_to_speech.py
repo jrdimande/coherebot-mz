@@ -18,3 +18,6 @@ class TextToSpeech:
     def speak(self, text):
         self.engine.say(text)
         self.engine.runAndWait()
+
+    def stop(self):
+        self.engine.stop()
