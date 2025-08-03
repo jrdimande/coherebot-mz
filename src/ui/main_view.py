@@ -3,7 +3,7 @@ from src.core.cohere_service import CohereClient
 from src.core.speech_recognition import SpeechRecognizer
 from tkinter import PhotoImage
 import threading
-from voice_conversation_view import VoiceConversation
+from src.ui.voice_conversation_view import VoiceConversation
 
 
 class MainView:
@@ -115,6 +115,3 @@ class MainView:
 
     def run(self):
         self.root.mainloop()
-
-c = MainView()
-c.run()
