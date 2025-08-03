@@ -84,7 +84,6 @@ class MainView:
         self.responses_text.insert(tk.END, response)
 
 
-
     def run(self):
         self.root.mainloop()
 
