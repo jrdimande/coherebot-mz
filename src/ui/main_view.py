@@ -44,7 +44,7 @@ class MainView:
         self.responses_text.place(x=280, y=90)
         self.responses_text.insert(tk.END, "Hi, how can i assist you today?")
 
-        # Message tex
+        # Message text
         self.message_text = tk.Text(self.root,
                                     width=75,
                                     height=5,
@@ -76,6 +76,11 @@ class MainView:
         self.dialog_img = PhotoImage(file="../assets/images/waves.png")
         self.dialog_btn = tk.Button(self.root, image=self.dialog_img, bd=0, command=self.open_voice_conversation)
         self.dialog_btn.place(x=780, y=600)
+
+        # Add files icon and button
+        self.add_file_img = PhotoImage(file="../assets/images/upload_file.png")
+        self.add_file_btn = tk.Button(self.root, image=self.add_file_img, bd=0)
+        self.add_file_btn.place(x=250, y=600)
 
     def send_message(self, event=None):
         threading.Thread(target=self.send_message_thread).start()

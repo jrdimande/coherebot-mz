@@ -40,11 +40,9 @@ class VoiceConversation:
         response = self.cohere_client.get_response(text)
         self.tts.speak(response)
 
-    # Close window functio
+    # Close window function
     def close_window(self):
         self.root.destroy()
 
-    def run(self):
-        self.root.mainloop()
 
 
