@@ -15,7 +15,7 @@ class VoiceConversation:
         self.sr = SpeechRecognizer()
 
         # Listening image
-        self.listening_img = PhotoImage(file="../assets/listening.png")
+        self.listening_img = PhotoImage(file="../assets/images/listening.png")
         self.listening_label = tk.Label(self.root, image=self.listening_img, bg="#b4a1ff")
         self.listening_label.place(x=425, y=200)
 

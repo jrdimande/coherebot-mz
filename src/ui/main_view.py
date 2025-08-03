@@ -14,13 +14,12 @@ class MainView:
         self.cohere_client = CohereClient()
         self.sr = SpeechRecognizer()
 
-
         # Sidebar
         sidebar = tk.Frame(self.root, bg="#b4a1ff", width=200)
         sidebar.pack(side="left", fill="y")
 
         # Image logo
-        self.logo_img = PhotoImage(file="../assets/cohere_logo.png")
+        self.logo_img = PhotoImage(file="../assets/images/cohere_logo.png")
         self.logo_btn = tk.Button(self.root, image=self.logo_img, bg="white", bd=0)
         self.logo_btn.place(x=15, y=15)
 
@@ -57,7 +56,7 @@ class MainView:
         self.message_text.bind("<Return>", self.send_message)
 
         # Send message button
-        self.send_message_img = PhotoImage(file="../assets/arrow_up.png")
+        self.send_message_img = PhotoImage(file="../assets/images/arrow_up.png")
         self.send_message_btn = tk.Button(self.root,
                                           image=self.send_message_img,
                                           bg="#f3f2f7",
@@ -66,9 +65,10 @@ class MainView:
                                           )
         self.send_message_btn.place(x=860, y=600)
 
-        self.voice_img = PhotoImage(file="../assets/microfone.png")
+        self.voice_img = PhotoImage(file="../assets/images/microfone.png")
         self.send_voice_message = tk.Button(self.root, image=self.voice_img, bd=0, command=self.listen)
         self.send_voice_message.place(x=820, y=602)
+
     # Send messages function
     def send_message(self, event=None):
         message = self.message_text.get("1.0", tk.END).strip()
@@ -76,6 +76,7 @@ class MainView:
         response = self.cohere_client.get_response(message)
         self.responses_text.delete("1.0", tk.END)
         self.responses_text.insert(tk.END, response)
+
     def listen(self):
         self.responses_text.insert(tk.END, "Listening...")
         message = self.sr.listen()
