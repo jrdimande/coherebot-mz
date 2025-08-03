@@ -15,3 +15,4 @@ class CohereClient:
             temperature=self.temperature
         )
         return response.text
+
