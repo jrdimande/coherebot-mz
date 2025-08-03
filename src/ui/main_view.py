@@ -3,6 +3,7 @@ from src.core.cohere_service import CohereClient
 from src.core.speech_recognition import SpeechRecognizer
 from tkinter import PhotoImage
 import threading
+from voice_conversation_view import VoiceConversation
 
 
 class MainView:
@@ -66,9 +67,15 @@ class MainView:
                                           )
         self.send_message_btn.place(x=860, y=600)
 
+        # Send voice message
         self.voice_img = PhotoImage(file="../assets/images/microfone.png")
         self.send_voice_message = tk.Button(self.root, image=self.voice_img, bd=0, command=self.listen)
         self.send_voice_message.place(x=820, y=602)
+
+        # Dialog
+        self.dialog_img = PhotoImage(file="../assets/images/waves.png")
+        self.dialog_btn = tk.Button(self.root, image=self.dialog_img, bd=0, command=self.open_voice_conversation)
+        self.dialog_btn.place(x=780, y=600)
 
     def send_message(self, event=None):
         threading.Thread(target=self.send_message_thread).start()
@@ -95,6 +102,9 @@ class MainView:
         message = self.sr.listen()
         response = self.cohere_client.get_response(message)
         self.responses_text.after(0, lambda : self.show_response(response))
+
+    def open_voice_conversation(self):
+        VoiceConversation(self.root)
 
 
 

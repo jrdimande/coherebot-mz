@@ -6,8 +6,8 @@ from tkinter import PhotoImage
 import threading
 
 class VoiceConversation:
-    def __init__(self):
-        self.root = tk.Tk()
+    def __init__(self, parent):
+        self.root = tk.Toplevel(parent)
         self.root.title("Coherebot")
         self.root.config(bg="#b4a1ff")
         self.root.geometry("950x700")
@@ -23,7 +23,7 @@ class VoiceConversation:
 
         # Close window button
         self.close_img = PhotoImage(file="../assets/images/close_window.png")
-        self.close_btn = tk.Button(self.root, image=self.close_img, bd=0, command=None)
+        self.close_btn = tk.Button(self.root, image=self.close_img, bd=0, command=self.close_window)
         self.close_btn.place(x=650, y=500)
 
         # Mic image and button
@@ -48,5 +48,3 @@ class VoiceConversation:
         self.root.mainloop()
 
 
-v = VoiceConversation()
-v.run()
