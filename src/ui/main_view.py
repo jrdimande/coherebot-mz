@@ -1,5 +1,6 @@
 import tkinter as tk
 from src.core.cohere_service import CohereClient
+from src.core.speech_recognition import SpeechRecognizer
 from tkinter import PhotoImage
 
 
@@ -11,6 +12,8 @@ class MainView:
         self.root.geometry("950x700")
         self.root.resizable(False, False)
         self.cohere_client = CohereClient()
+        self.sr = SpeechRecognizer()
+
 
         # Sidebar
         sidebar = tk.Frame(self.root, bg="#b4a1ff", width=200)
@@ -63,6 +66,9 @@ class MainView:
                                           )
         self.send_message_btn.place(x=860, y=600)
 
+        self.voice_img = PhotoImage(file="../assets/microfone.png")
+        self.send_voice_message = tk.Button(self.root, image=self.voice_img, bd=0, command=self.listen)
+        self.send_voice_message.place(x=820, y=602)
     # Send messages function
     def send_message(self, event=None):
         message = self.message_text.get("1.0", tk.END).strip()
@@ -70,6 +76,14 @@ class MainView:
         response = self.cohere_client.get_response(message)
         self.responses_text.delete("1.0", tk.END)
         self.responses_text.insert(tk.END, response)
+    def listen(self):
+        self.responses_text.insert(tk.END, "Listening...")
+        message = self.sr.listen()
+        response = self.cohere_client.get_response(message)
+        self.responses_text.delete("1.0", tk.END)
+        self.responses_text.insert(tk.END, response)
+
+
 
     def run(self):
         self.root.mainloop()
