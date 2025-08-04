@@ -111,7 +111,5 @@ class MainView:
     def open_voice_conversation(self):
         VoiceConversation(self.root)
 
-
-
     def run(self):
         self.root.mainloop()
