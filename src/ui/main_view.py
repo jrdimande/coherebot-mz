@@ -21,7 +21,7 @@ class MainView:
         sidebar.pack(side="left", fill="y")
 
         # Image logo
-        self.logo_img = PhotoImage(file="../assets/images/cohere_logo.png")
+        self.logo_img = PhotoImage(file="./assets/images/cohere_logo.png")
         self.logo_btn = tk.Button(self.root, image=self.logo_img, bg="white", bd=0)
         self.logo_btn.place(x=15, y=15)
 
