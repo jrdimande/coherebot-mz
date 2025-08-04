@@ -113,3 +113,6 @@ class MainView:
 
     def run(self):
         self.root.mainloop()
+
+c = MainView()
+c.run()
